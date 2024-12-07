@@ -1,6 +1,8 @@
 package com.inventory.management.infrastructure.adapter.in.rest;
 
+import com.inventory.management.application.dto.request.CategoryRequest;
 import com.inventory.management.application.dto.request.ProductRequest;
+import com.inventory.management.application.ports.in.CategoryUseCase;
 import com.inventory.management.application.ports.in.ProductUseCase;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -10,13 +12,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/products")
+@RequestMapping("/category")
 @AllArgsConstructor
-public class ProductController {
-    private final ProductUseCase productUseCase;
+public class CategoryController {
+    private final CategoryUseCase categoryUseCase;
 
     @PostMapping
-    public void createProduct(@RequestBody  ProductRequest product) {
-        productUseCase.createProduct(product);
+    public void createProduct(@RequestBody @Valid CategoryRequest categoryRequest) {
+        categoryUseCase.createCategory(categoryRequest);
     }
 }

@@ -10,8 +10,7 @@ public class Product {
     private int stock;
     private Long categoryId;
 
-    public Product(Long id, String name, String description, BigDecimal price, int stock, Long categoryId) {
-        this.id = id;
+    public Product(String name, String description, BigDecimal price, int stock, Long categoryId) {
         this.name = name;
         this.description = description;
         this.price = price;

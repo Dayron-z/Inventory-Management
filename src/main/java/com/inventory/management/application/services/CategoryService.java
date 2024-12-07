@@ -7,25 +7,23 @@ import com.inventory.management.application.ports.in.ProductUseCase;
 import com.inventory.management.application.ports.out.CategoryRepositoryPort;
 import com.inventory.management.application.ports.out.ProductRepositoryPort;
 import com.inventory.management.domain.entities.Category;
-import com.inventory.management.domain.entities.Product;
+import com.inventory.management.infrastructure.entities.CategoryEntity;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.math.BigDecimal;
-
 @Service
 @AllArgsConstructor
-public class ProductService implements ProductUseCase {
+public class CategoryService implements CategoryUseCase {
 
-    private final ProductRepositoryPort productRepositoryPort;
+    private final CategoryRepositoryPort categoryRepositoryPort;
 
     @Override
-    public void createProduct(ProductRequest productRequest) {
-        Product product = requestToDomain(productRequest);
-        productRepositoryPort.save(product);
+    public void createCategory(CategoryRequest categoryRequest) {
+        Category category = requestToDomain(categoryRequest);
+        categoryRepositoryPort.save(category);
     }
 
-    private Product requestToDomain(ProductRequest pR) {
-        return new Product(pR.getName(), pR.getDescription(), pR.getPrice(), pR.getStock(), pR.getCategoryId());
+    private Category requestToDomain(CategoryRequest cR) {
+        return new Category(cR.getName(), cR.getDescription());
     }
 }
