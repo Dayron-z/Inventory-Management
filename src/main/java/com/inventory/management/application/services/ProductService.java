@@ -1,12 +1,8 @@
 package com.inventory.management.application.services;
 
-import com.inventory.management.application.dto.request.CategoryRequest;
 import com.inventory.management.application.dto.request.ProductRequest;
-import com.inventory.management.application.ports.in.CategoryUseCase;
 import com.inventory.management.application.ports.in.ProductUseCase;
-import com.inventory.management.application.ports.out.CategoryRepositoryPort;
 import com.inventory.management.application.ports.out.ProductRepositoryPort;
-import com.inventory.management.domain.entities.Category;
 import com.inventory.management.domain.entities.Product;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
