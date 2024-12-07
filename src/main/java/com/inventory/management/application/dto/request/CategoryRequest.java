@@ -15,6 +15,7 @@ import java.util.List;
 public class CategoryRequest {
     @NotNull(message = "The name it can be null")
     private String name;
+    @NotNull(message = "The description it can be null")
     private String description;
     private List<ProductEntity> products;
 }
