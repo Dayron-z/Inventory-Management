@@ -1,5 +1,6 @@
 package com.inventory.management.mapper;
 
+import com.inventory.management.application.dto.response.CategoryResponse;
 import com.inventory.management.domain.entities.Category;
 import com.inventory.management.infrastructure.entities.CategoryEntity;
 import com.inventory.management.infrastructure.entities.ProductEntity;
@@ -17,4 +18,13 @@ public class CategoryMapper {
                 .products(productEntities)
                 .build();
     }
+
+    public static CategoryResponse entityToEntityResponse(CategoryEntity category) {
+        return CategoryResponse.builder()
+                .name(category.getName())
+                .description(category.getDescription())
+                .build();
+    }
+
+
 }
