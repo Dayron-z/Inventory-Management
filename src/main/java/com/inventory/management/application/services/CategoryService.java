@@ -1,17 +1,13 @@
 package com.inventory.management.application.services;
 
 import com.inventory.management.application.dto.request.CategoryRequest;
-import com.inventory.management.application.dto.request.ProductRequest;
 import com.inventory.management.application.dto.response.CategoryResponse;
 import com.inventory.management.application.ports.in.CategoryUseCase;
-import com.inventory.management.application.ports.in.ProductUseCase;
 import com.inventory.management.application.ports.out.CategoryRepositoryPort;
-import com.inventory.management.application.ports.out.ProductRepositoryPort;
 import com.inventory.management.domain.entities.Category;
 import com.inventory.management.infrastructure.entities.CategoryEntity;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -30,6 +26,25 @@ public class CategoryService implements CategoryUseCase {
     @Override
     public Page<CategoryResponse> findAll(Pageable pageable) {
         return categoryRepositoryPort.findAll(pageable);
+    }
+
+    @Override
+    public CategoryEntity findById(Long id) {
+        return categoryRepositoryPort.findById(id);
+    }
+
+    @Override
+    public void editCategory(CategoryRequest cR, Long id) {
+        CategoryEntity oldCategory = findById(id);
+        Category category = requestToDomain(cR);
+        category.setId(oldCategory.getId());
+        categoryRepositoryPort.edit(category);
+    }
+
+    @Override
+    public void deleteCategory(Long id) {
+        findById(id);
+        categoryRepositoryPort.delete(id);
     }
 
     private Category requestToDomain(CategoryRequest cR) {

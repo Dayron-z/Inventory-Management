@@ -30,11 +30,22 @@ public class CategoryController {
         return ResponseEntity.ok(categoriesPage);
     }
 
-
     @PostMapping
     public ResponseEntity<String> createCategory(@RequestBody @Valid CategoryRequest categoryRequest) {
         categoryUseCase.createCategory(categoryRequest);
         return ResponseEntity.ok("Successfully created");
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<String> editCategory(@RequestBody @Valid CategoryRequest categoryRequest, @PathVariable Long id) {
+        categoryUseCase.editCategory(categoryRequest, id);
+        return ResponseEntity.ok("Successfully updated");
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteCategory(@PathVariable Long id) {
+        categoryUseCase.deleteCategory(id);
+        return ResponseEntity.ok("Successfully deleted");
     }
 
 

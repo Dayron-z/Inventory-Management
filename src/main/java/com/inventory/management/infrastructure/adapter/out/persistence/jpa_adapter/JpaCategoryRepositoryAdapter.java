@@ -6,6 +6,7 @@ import com.inventory.management.domain.entities.Category;
 import com.inventory.management.infrastructure.adapter.out.persistence.repository.CategoryRepository;
 import com.inventory.management.infrastructure.entities.CategoryEntity;
 import com.inventory.management.mapper.CategoryMapper;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -26,5 +27,18 @@ public class JpaCategoryRepositoryAdapter implements CategoryRepositoryPort {
         return categoryRepository.findAll(pageable).map(CategoryMapper::entityToEntityResponse);
     }
 
+    @Override
+    public CategoryEntity findById(Long id) {
+        return categoryRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("The supplied id does not correspond to any category."));
+    }
 
+    @Override
+    public CategoryEntity edit(Category category) {
+        return categoryRepository.save(CategoryMapper.domainToEntityForUpdate(category));
+    }
+
+    @Override
+    public void delete(Long id) {
+         categoryRepository.deleteById(id);
+    }
 }

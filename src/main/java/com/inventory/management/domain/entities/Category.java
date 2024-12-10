@@ -9,12 +9,18 @@ public class Category {
     private String description;
 
     private List<Product> products;
+    public Category(Long id, String name, String description) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+    }
 
     public Category(String name, String description) {
         this.name = name;
         this.description = description;
         this.products = new ArrayList<>();
     }
+
 
     public Category() {
     }

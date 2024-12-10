@@ -9,4 +9,7 @@ import org.springframework.data.domain.Pageable;
 public interface CategoryRepositoryPort {
     CategoryEntity save(Category category);
     Page<CategoryResponse> findAll(Pageable pageable);
+    CategoryEntity findById(Long id);
+    CategoryEntity edit(Category category);
+    void delete (Long id);
 }
