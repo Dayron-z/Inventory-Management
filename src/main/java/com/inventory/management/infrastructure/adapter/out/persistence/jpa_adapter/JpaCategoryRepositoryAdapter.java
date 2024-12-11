@@ -1,6 +1,6 @@
 package com.inventory.management.infrastructure.adapter.out.persistence.jpa_adapter;
 
-import com.inventory.management.application.dto.response.CategoryResponse;
+import com.inventory.management.application.dto.response.CategoryLightResponse;
 import com.inventory.management.application.ports.out.CategoryRepositoryPort;
 import com.inventory.management.domain.entities.Category;
 import com.inventory.management.infrastructure.adapter.out.persistence.repository.CategoryRepository;
@@ -23,7 +23,7 @@ public class JpaCategoryRepositoryAdapter implements CategoryRepositoryPort {
     }
 
     @Override
-    public Page<CategoryResponse> findAll(Pageable pageable) {
+    public Page<CategoryLightResponse> findAll(Pageable pageable) {
         return categoryRepository.findAll(pageable).map(CategoryMapper::entityToEntityResponse);
     }
 

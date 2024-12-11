@@ -1,7 +1,7 @@
 package com.inventory.management.application.services;
 
 import com.inventory.management.application.dto.request.CategoryRequest;
-import com.inventory.management.application.dto.response.CategoryResponse;
+import com.inventory.management.application.dto.response.CategoryLightResponse;
 import com.inventory.management.application.ports.in.CategoryUseCase;
 import com.inventory.management.application.ports.out.CategoryRepositoryPort;
 import com.inventory.management.domain.entities.Category;
@@ -24,7 +24,7 @@ public class CategoryService implements CategoryUseCase {
     }
 
     @Override
-    public Page<CategoryResponse> findAll(Pageable pageable) {
+    public Page<CategoryLightResponse> findAll(Pageable pageable) {
         return categoryRepositoryPort.findAll(pageable);
     }
 

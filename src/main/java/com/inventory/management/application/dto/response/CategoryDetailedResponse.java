@@ -1,18 +1,17 @@
 package com.inventory.management.application.dto.response;
 
-import com.inventory.management.infrastructure.entities.ProductEntity;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
+
 import lombok.*;
 
 import java.util.List;
-
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class CategoryResponse {
+public class CategoryDetailedResponse {
+    private Long id;
     private String name;
     private String description;
+    private List<ProductLightResponse> products;
 }

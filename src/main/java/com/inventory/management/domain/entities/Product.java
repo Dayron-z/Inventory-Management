@@ -10,6 +10,8 @@ public class Product {
     private int stock;
     private Long categoryId;
 
+
+
     public Product(String name, String description, BigDecimal price, int stock, Long categoryId) {
         this.name = name;
         this.description = description;

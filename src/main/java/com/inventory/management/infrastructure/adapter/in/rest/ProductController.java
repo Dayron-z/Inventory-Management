@@ -15,8 +15,4 @@ import org.springframework.web.bind.annotation.RestController;
 public class ProductController {
     private final ProductUseCase productUseCase;
 
-    @PostMapping
-    public void createProduct(@RequestBody  ProductRequest product) {
-        productUseCase.createProduct(product);
-    }
 }
