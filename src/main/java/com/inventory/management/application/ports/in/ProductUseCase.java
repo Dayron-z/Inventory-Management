@@ -1,15 +1,15 @@
 package com.inventory.management.application.ports.in;
 
-import com.inventory.management.application.dto.request.CategoryRequest;
+import com.inventory.management.application.dto.request.ProductRequest;
 import com.inventory.management.application.dto.response.ProductLightResponse;
-import com.inventory.management.infrastructure.entities.CategoryEntity;
+import com.inventory.management.domain.entities.Product;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 public interface ProductUseCase {
-    void createProduct(CategoryRequest categoryRequest);
+    void createProduct(ProductRequest productRequest);
     Page<ProductLightResponse> findAll(Pageable pageable);
-    CategoryEntity findById(Long id);
-    void editCategory(CategoryRequest categoryRequest, Long id);
-    void deleteCategory(Long id);
+    Product findById(Long id);
+    void editProduct(ProductRequest productRequest, Long id);
+    void deleteProduct(Long id);
 }

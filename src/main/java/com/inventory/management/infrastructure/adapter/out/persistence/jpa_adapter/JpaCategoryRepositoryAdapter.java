@@ -34,7 +34,7 @@ public class JpaCategoryRepositoryAdapter implements CategoryRepositoryPort {
 
     @Override
     public CategoryEntity edit(Category category) {
-        return categoryRepository.save(CategoryMapper.domainToEntityForUpdate(category));
+        return categoryRepository.save(CategoryMapper.domainToEntityWithId(category));
     }
 
     @Override

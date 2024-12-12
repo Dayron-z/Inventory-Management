@@ -6,6 +6,7 @@ import com.inventory.management.application.ports.in.CategoryUseCase;
 import com.inventory.management.application.ports.out.CategoryRepositoryPort;
 import com.inventory.management.domain.entities.Category;
 import com.inventory.management.infrastructure.entities.CategoryEntity;
+import com.inventory.management.mapper.CategoryMapper;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -19,9 +20,10 @@ public class CategoryService implements CategoryUseCase {
 
     @Override
     public void createCategory(CategoryRequest categoryRequest) {
-        Category category = requestToDomain(categoryRequest);
+        Category category = categoryRequestToDomain(categoryRequest);
         categoryRepositoryPort.save(category);
     }
+
 
     @Override
     public Page<CategoryLightResponse> findAll(Pageable pageable) {
@@ -29,15 +31,17 @@ public class CategoryService implements CategoryUseCase {
     }
 
     @Override
-    public CategoryEntity findById(Long id) {
-        return categoryRepositoryPort.findById(id);
+    public Category findById(Long id) {
+        CategoryEntity categoryEntity = categoryRepositoryPort.findById(id);
+        return CategoryMapper.entityToDomain(categoryEntity);
     }
+
 
     @Override
     public void editCategory(CategoryRequest cR, Long id) {
-        CategoryEntity oldCategory = findById(id);
-        Category category = requestToDomain(cR);
-        category.setId(oldCategory.getId());
+        Category category = findById(id);
+        category.setName(cR.getName());
+        category.setDescription(cR.getDescription());
         categoryRepositoryPort.edit(category);
     }
 
@@ -47,7 +51,7 @@ public class CategoryService implements CategoryUseCase {
         categoryRepositoryPort.delete(id);
     }
 
-    private Category requestToDomain(CategoryRequest cR) {
+    private Category categoryRequestToDomain(CategoryRequest cR) {
         return new Category(cR.getName(), cR.getDescription());
     }
 }

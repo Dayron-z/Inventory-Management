@@ -9,30 +9,20 @@ import java.util.List;
 
 public class CategoryMapper {
     public static CategoryEntity domainToEntity(Category category) {
-        List<ProductEntity> productEntities = category.getProducts().stream().map(ProductMapper::domainToEntity).toList();
-
-        return CategoryEntity.builder()
-                .name(category.getName())
-                .description(category.getDescription())
-                .products(productEntities)
-                .build();
+        return mapToEntity(category, null);  // No asignamos ID para creación
     }
 
-    public static CategoryEntity domainToEntityForUpdate(Category category) {
-        List<ProductEntity> productEntities = category.getProducts().stream()
-                .map(ProductMapper::domainToEntity)
-                .toList();
-
-        return CategoryEntity.builder()
-                .id(category.getId())
-                .name(category.getName())
-                .description(category.getDescription())
-                .products(productEntities)
-                .build();
+    public static CategoryEntity domainToEntityWithId(Category category) {
+        return mapToEntity(category, category.getId());  // Asignamos ID para actualizaciones
     }
 
-
-
+    private static CategoryEntity mapToEntity(Category category, Long id) {
+        return CategoryEntity.builder()
+                .id(id)  // Asignar ID si es no-nulo
+                .name(category.getName())
+                .description(category.getDescription())
+                .build();
+    }
 
     public static CategoryLightResponse entityToEntityResponse(CategoryEntity category) {
         return CategoryLightResponse.builder()
@@ -41,5 +31,15 @@ public class CategoryMapper {
                 .build();
     }
 
+    public static Category entityToDomain(CategoryEntity categoryEntity) {
+        if (categoryEntity == null) {
+            return null;
+        }
+        return new Category(
+                categoryEntity.getId(),
+                categoryEntity.getName(),
+                categoryEntity.getDescription()
+        );
+    }
 
 }

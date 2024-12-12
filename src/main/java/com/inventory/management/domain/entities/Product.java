@@ -1,6 +1,10 @@
 package com.inventory.management.domain.entities;
 
+import com.inventory.management.infrastructure.entities.InventoryMovementEntity;
+
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Product {
     private Long id;
@@ -8,20 +12,42 @@ public class Product {
     private String description;
     private BigDecimal price;
     private int stock;
-    private Long categoryId;
+    private Category category;
+    private List<InventoryMovement> movement;
 
 
-
-    public Product(String name, String description, BigDecimal price, int stock, Long categoryId) {
+    public Product(Long id, String name, String description, BigDecimal price, int stock, Category category, List<InventoryMovement> movement) {
+        this.id = id;
         this.name = name;
         this.description = description;
         this.price = price;
         this.stock = stock;
-        this.categoryId = categoryId;
+        this.category = category;
+        this.movement = movement;
     }
+
+    public Product(String name, String description, BigDecimal price, int stock) {
+        this.name = name;
+        this.description = description;
+        this.price = price;
+        this.stock = stock;
+    }
+
+    public Product(String name, String description, BigDecimal price, int stock, Category category) {
+        this.name = name;
+        this.description = description;
+        this.price = price;
+        this.stock = stock;
+        this.category = category;
+    }
+
+
+
+
 
     public Product() {
     }
+
 
     public Long getId() {
         return id;
@@ -63,11 +89,19 @@ public class Product {
         this.stock = stock;
     }
 
-    public Long getCategoryId() {
-        return categoryId;
+    public Category getCategory() {
+        return category;
     }
 
-    public void setCategoryId(Long categoryId) {
-        this.categoryId = categoryId;
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
+    public List<InventoryMovement> getMovement() {
+        return movement;
+    }
+
+    public void setMovement(List<InventoryMovement> movement) {
+        this.movement = movement;
     }
 }
