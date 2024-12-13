@@ -1,6 +1,5 @@
 package com.inventory.management.infrastructure.adapter.in.rest;
 
-import com.inventory.management.application.dto.request.CategoryRequest;
 import com.inventory.management.application.dto.request.ProductRequest;
 import com.inventory.management.application.ports.in.ProductUseCase;
 import jakarta.validation.Valid;

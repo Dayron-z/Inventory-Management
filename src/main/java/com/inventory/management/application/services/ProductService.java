@@ -1,22 +1,23 @@
 package com.inventory.management.application.services;
 
 import com.inventory.management.application.dto.request.ProductRequest;
-import com.inventory.management.application.dto.response.ProductLightResponse;
+import com.inventory.management.application.dto.response.ProductDetailedResponse;
 import com.inventory.management.application.ports.in.ProductUseCase;
 import com.inventory.management.application.ports.out.CategoryRepositoryPort;
+import com.inventory.management.application.ports.out.InventoryMovementRepositoryPort;
 import com.inventory.management.application.ports.out.ProductRepositoryPort;
 import com.inventory.management.domain.entities.Category;
 import com.inventory.management.domain.entities.Product;
+import com.inventory.management.infrastructure.adapter.out.persistence.repository.InventoryMovementRepository;
 import com.inventory.management.infrastructure.entities.CategoryEntity;
 import com.inventory.management.infrastructure.entities.ProductEntity;
 import com.inventory.management.mapper.CategoryMapper;
+import com.inventory.management.mapper.InventoryMapper;
 import com.inventory.management.mapper.ProductMapper;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-
-import java.math.BigDecimal;
 
 @Service
 @AllArgsConstructor
@@ -24,6 +25,7 @@ public class ProductService implements ProductUseCase {
 
     private final ProductRepositoryPort productRepositoryPort;
     private final CategoryRepositoryPort categoryRepositoryPort;
+    private final InventoryMovementRepositoryPort inventoryMovementRepositoryPort;
 
     @Override
     public void createProduct(ProductRequest productRequest) {
@@ -32,8 +34,8 @@ public class ProductService implements ProductUseCase {
     }
 
     @Override
-    public Page<ProductLightResponse> findAll(Pageable pageable) {
-        return null;
+    public Page<ProductDetailedResponse> findAll(Pageable pageable) {
+        return this.productRepositoryPort.findAll(pageable);
     }
 
     @Override

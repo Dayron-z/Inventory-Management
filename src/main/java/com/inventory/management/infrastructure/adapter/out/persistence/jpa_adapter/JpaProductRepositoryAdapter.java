@@ -1,6 +1,7 @@
 package com.inventory.management.infrastructure.adapter.out.persistence.jpa_adapter;
 
 
+import com.inventory.management.application.dto.response.ProductDetailedResponse;
 import com.inventory.management.application.ports.out.ProductRepositoryPort;
 import com.inventory.management.domain.entities.Product;
 import com.inventory.management.infrastructure.adapter.out.persistence.repository.ProductRepository;
@@ -24,8 +25,8 @@ public class JpaProductRepositoryAdapter implements ProductRepositoryPort {
     }
 
     @Override
-    public Page<ProductEntity> findAll(Pageable pageable) {
-        return null;
+    public Page<ProductDetailedResponse> findAll(Pageable pageable) {
+        return productRepository.findAll(pageable).map(ProductMapper::entityToProductDetailedResponse);
     }
 
     @Override

@@ -1,19 +1,20 @@
 package com.inventory.management.application.dto.response;
 
-import com.inventory.management.infrastructure.entities.CategoryEntity;
 import lombok.*;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class ProductLightResponse {
+public class ProductDetailedResponse {
     private Long id;
     private String name;
     private String description;
     private BigDecimal price;
     private Integer stock;
+    private List<InventoryMovementEntityLightResponse> movement;
 }

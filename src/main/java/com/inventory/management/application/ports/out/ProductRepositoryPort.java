@@ -1,6 +1,7 @@
 package com.inventory.management.application.ports.out;
 
 import com.inventory.management.application.dto.response.CategoryLightResponse;
+import com.inventory.management.application.dto.response.ProductDetailedResponse;
 import com.inventory.management.application.dto.response.ProductLightResponse;
 import com.inventory.management.domain.entities.Category;
 import com.inventory.management.domain.entities.Product;
@@ -11,7 +12,7 @@ import org.springframework.data.domain.Pageable;
 
 public interface ProductRepositoryPort {
     void save(Product product);
-    Page<ProductEntity> findAll(Pageable pageable);
+    Page<ProductDetailedResponse> findAll(Pageable pageable);
     ProductEntity findById(Long id);
     ProductEntity edit(Product category);
     void delete (Long id);

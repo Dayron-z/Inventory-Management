@@ -1,14 +1,13 @@
 package com.inventory.management.mapper;
 
-import com.inventory.management.domain.entities.Category;
+import com.inventory.management.application.dto.response.InventoryMovementEntityLightResponse;
+import com.inventory.management.application.dto.response.ProductDetailedResponse;
+import com.inventory.management.application.dto.response.ProductLightResponse;
 import com.inventory.management.domain.entities.Product;
-import com.inventory.management.infrastructure.entities.CategoryEntity;
-import com.inventory.management.infrastructure.entities.InventoryMovementEntity;
 import com.inventory.management.infrastructure.entities.ProductEntity;
-import jakarta.persistence.*;
 
-import java.math.BigDecimal;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ProductMapper {
     public static ProductEntity domainToEntity(Product product) {
@@ -21,8 +20,6 @@ public class ProductMapper {
                 .category(CategoryMapper.domainToEntityWithId(product.getCategory()))
                 .build();
     }
-
-
     public static Product entityToDomain(ProductEntity productEntity) {
         if (productEntity == null) {
             return null;
@@ -34,6 +31,33 @@ public class ProductMapper {
                 productEntity.getStock()
         );
     }
+    public static ProductLightResponse entityToProductLightResponse(ProductEntity productEntity) {
+        if (productEntity == null) {
+            return null;
+        }
+        return ProductLightResponse.builder()
+                .id(productEntity.getId())
+                .name(productEntity.getName())
+                .description(productEntity.getDescription())
+                .price(productEntity.getPrice())
+                .stock(productEntity.getStock())
+                .build();
+    }
+
+
+    public static ProductDetailedResponse entityToProductDetailedResponse(ProductEntity productEntity) {
+        List<InventoryMovementEntityLightResponse > inventoryResponse = productEntity.getMovement().stream().map(InventoryMapper::entityToEntityResponse).toList();
+
+        return ProductDetailedResponse.builder()
+                .id(productEntity.getId())
+                .name(productEntity.getName())
+                .description(productEntity.getDescription())
+                .price(productEntity.getPrice())
+                .stock(productEntity.getStock())
+                .movement(inventoryResponse)
+                .build();
+    }
+
 
 
 
