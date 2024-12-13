@@ -7,7 +7,6 @@ import com.inventory.management.domain.entities.Product;
 import com.inventory.management.infrastructure.entities.ProductEntity;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class ProductMapper {
     public static ProductEntity domainToEntity(Product product) {
@@ -43,8 +42,6 @@ public class ProductMapper {
                 .stock(productEntity.getStock())
                 .build();
     }
-
-
     public static ProductDetailedResponse entityToProductDetailedResponse(ProductEntity productEntity) {
         List<InventoryMovementEntityLightResponse > inventoryResponse = productEntity.getMovement().stream().map(InventoryMapper::entityToEntityResponse).toList();
 
@@ -57,9 +54,4 @@ public class ProductMapper {
                 .movement(inventoryResponse)
                 .build();
     }
-
-
-
-
-
 }

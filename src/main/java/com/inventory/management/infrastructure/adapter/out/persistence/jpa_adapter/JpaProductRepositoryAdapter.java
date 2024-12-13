@@ -7,7 +7,9 @@ import com.inventory.management.domain.entities.Product;
 import com.inventory.management.infrastructure.adapter.out.persistence.repository.ProductRepository;
 import com.inventory.management.infrastructure.entities.ProductEntity;
 import com.inventory.management.mapper.ProductMapper;
+import com.inventory.management.mapper.ProductMapperMapStruct;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
@@ -16,17 +18,19 @@ import org.springframework.stereotype.Repository;
 @AllArgsConstructor
 public class JpaProductRepositoryAdapter implements ProductRepositoryPort {
     private final ProductRepository productRepository;
+    @Autowired
+    private final ProductMapperMapStruct productMapperMapStruct;
 
 
     @Override
     public void save(Product product) {
-        ProductEntity productEntity = ProductMapper.domainToEntity(product);
+        ProductEntity productEntity = productMapperMapStruct.domainToEntity(product);
         productRepository.save(productEntity);
     }
 
     @Override
     public Page<ProductDetailedResponse> findAll(Pageable pageable) {
-        return productRepository.findAll(pageable).map(ProductMapper::entityToProductDetailedResponse);
+        return productRepository.findAll(pageable).map(productMapperMapStruct::entityToProductDetailedResponse);
     }
 
     @Override
