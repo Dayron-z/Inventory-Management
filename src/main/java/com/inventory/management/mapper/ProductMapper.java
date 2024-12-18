@@ -16,7 +16,7 @@ public class ProductMapper {
                 .description(product.getDescription())
                 .price(product.getPrice())
                 .stock(product.getStock())
-                .category(CategoryMapper.domainToEntityWithId(product.getCategory()))
+/*                .category(CategoryMapper.domainToEntityWithId(product.getCategory()))*/
                 .build();
     }
     public static Product entityToDomain(ProductEntity productEntity) {
@@ -43,7 +43,9 @@ public class ProductMapper {
                 .build();
     }
     public static ProductDetailedResponse entityToProductDetailedResponse(ProductEntity productEntity) {
+/*
         List<InventoryMovementEntityLightResponse > inventoryResponse = productEntity.getMovement().stream().map(InventoryMapper::entityToEntityResponse).toList();
+*/
 
         return ProductDetailedResponse.builder()
                 .id(productEntity.getId())
@@ -51,7 +53,9 @@ public class ProductMapper {
                 .description(productEntity.getDescription())
                 .price(productEntity.getPrice())
                 .stock(productEntity.getStock())
+/*
                 .movement(inventoryResponse)
+*/
                 .build();
     }
 }

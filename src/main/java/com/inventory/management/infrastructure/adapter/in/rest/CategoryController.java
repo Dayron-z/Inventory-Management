@@ -37,7 +37,7 @@ public class CategoryController {
         return ResponseEntity.ok("Successfully created");
     }
 
-    @PutMapping("/{id}")
+    @PatchMapping("/{id}")
     public ResponseEntity<String> editCategory(@RequestBody @Valid CategoryRequest categoryRequest, @PathVariable Long id) {
         categoryUseCase.editCategory(categoryRequest, id);
         return ResponseEntity.ok("Successfully updated");

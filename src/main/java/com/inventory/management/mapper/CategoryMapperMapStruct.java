@@ -7,7 +7,7 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Named;
 
-@Mapper(componentModel = "spring", uses = {ProductMapperMapStruct.class})
+@Mapper(componentModel = "spring")
 public interface CategoryMapperMapStruct {
     @Mapping(target = "id", ignore = true)
     CategoryEntity domainToEntity(Category category);

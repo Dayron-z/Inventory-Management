@@ -6,8 +6,8 @@ import com.inventory.management.application.ports.out.ProductRepositoryPort;
 import com.inventory.management.domain.entities.Product;
 import com.inventory.management.infrastructure.adapter.out.persistence.repository.ProductRepository;
 import com.inventory.management.infrastructure.entities.ProductEntity;
-import com.inventory.management.mapper.ProductMapper;
 import com.inventory.management.mapper.ProductMapperMapStruct;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -35,18 +35,16 @@ public class JpaProductRepositoryAdapter implements ProductRepositoryPort {
 
     @Override
     public ProductEntity findById(Long id) {
-        return null;
+        return productRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("The supplied id does not correspond to any product."));
     }
 
     @Override
     public ProductEntity edit(Product category) {
-        return null;
+        return productRepository.save(productMapperMapStruct.domainToEntityWithId(category));
     }
 
     @Override
     public void delete(Long id) {
-
+        productRepository.deleteById(id);
     }
-
-
 }

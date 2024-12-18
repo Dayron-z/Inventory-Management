@@ -2,15 +2,12 @@ package com.inventory.management.application.services;
 
 import com.inventory.management.application.dto.request.CategoryRequest;
 import com.inventory.management.application.dto.response.CategoryDetailedResponse;
-import com.inventory.management.application.dto.response.CategoryLightResponse;
 import com.inventory.management.application.ports.in.CategoryUseCase;
 import com.inventory.management.application.ports.out.CategoryRepositoryPort;
 import com.inventory.management.domain.entities.Category;
 import com.inventory.management.infrastructure.entities.CategoryEntity;
-import com.inventory.management.mapper.CategoryMapper;
-import com.inventory.management.mapper.ProductMapperMapStruct;
+import com.inventory.management.mapper.CategoryMapperMapStruct;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -20,13 +17,14 @@ import org.springframework.stereotype.Service;
 public class CategoryService implements CategoryUseCase {
 
     private final CategoryRepositoryPort categoryRepositoryPort;
+    private final CategoryMapperMapStruct categoryMapperMapStruct;
+
 
     @Override
     public void createCategory(CategoryRequest categoryRequest) {
         Category category = categoryRequestToDomain(categoryRequest);
         categoryRepositoryPort.save(category);
     }
-
 
     @Override
     public Page<CategoryDetailedResponse> findAll(Pageable pageable) {
@@ -36,7 +34,7 @@ public class CategoryService implements CategoryUseCase {
     @Override
     public Category findById(Long id) {
         CategoryEntity categoryEntity = categoryRepositoryPort.findById(id);
-        return CategoryMapper.entityToDomain(categoryEntity);
+        return categoryMapperMapStruct.entityToDomain(categoryEntity);
     }
 
 

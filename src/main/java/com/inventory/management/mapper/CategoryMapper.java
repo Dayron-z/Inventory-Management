@@ -28,14 +28,16 @@ public class CategoryMapper {
     }
 
     public static CategoryDetailedResponse entityToEntityResponse(CategoryEntity category) {
+/*
         List<ProductLightResponse> products = category.getProducts().stream().map(ProductMapper::entityToProductLightResponse).collect(Collectors.toList());
+*/
 
 
         return CategoryDetailedResponse.builder()
                 .id(category.getId())
                 .name(category.getName())
                 .description(category.getDescription())
-                .products(products)
+/*                .products(products)*/
                 .build();
     }
 

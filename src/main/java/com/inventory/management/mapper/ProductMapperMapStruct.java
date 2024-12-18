@@ -12,7 +12,13 @@ import org.springframework.stereotype.Component;
 public interface ProductMapperMapStruct {
     @Mapping(source = "category", target = "category", qualifiedByName = "mapCategoryWithId")
     @Mapping(target = "movement", ignore = true)
+    ProductEntity domainToEntityWithId(Product product);
+
+    @Mapping(source = "category", target = "category", qualifiedByName = "mapCategoryWithId")
+    @Mapping(target = "movement", ignore = true)
+    @Mapping(target = "id", ignore = true)
     ProductEntity domainToEntity(Product product);
+
 
     Product entityToDomain(ProductEntity productEntity);
 
