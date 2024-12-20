@@ -15,7 +15,6 @@ import org.springframework.stereotype.Service;
 @Service
 @AllArgsConstructor
 public class CategoryService implements CategoryUseCase {
-
     private final CategoryRepositoryPort categoryRepositoryPort;
     private final CategoryMapperMapStruct categoryMapperMapStruct;
 
@@ -48,7 +47,6 @@ public class CategoryService implements CategoryUseCase {
 
     @Override
     public void deleteCategory(Long id) {
-        findById(id);
         categoryRepositoryPort.delete(id);
     }
 
